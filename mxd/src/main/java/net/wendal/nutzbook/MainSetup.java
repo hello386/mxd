@@ -7,6 +7,7 @@ import org.nutz.dao.util.Daos;
 import org.nutz.ioc.Ioc;
 import org.nutz.mvc.NutConfig;
 import org.nutz.mvc.Setup;
+import org.nutz.mvc.view.UTF8JsonView;
 
 import net.wendal.nutzbook.bean.User;
 
@@ -19,6 +20,9 @@ public class MainSetup implements Setup{
 
 	// 特别留意一下,是init方法,不是destroy方法!!!!!
 	public void init(NutConfig nc) {
+		
+		UTF8JsonView.CT = "text/plain";//防止在ie中返回json数据显示下载
+		
         Ioc ioc = nc.getIoc();
         Dao dao = ioc.get(Dao.class);
         // 如果没有createTablesInPackage,请检查nutz版本

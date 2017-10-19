@@ -7,23 +7,23 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>addArticle complex typeçš„ Java ç±»ã€‚
+ * <p>addArticle complex typeµÄ Java Àà¡£
  * 
- * <p>ä»¥ä¸‹æ¨¡å¼ç‰‡æ®µæŒ‡å®šåŒ…å«åœ¨æ­¤ç±»ä¸­çš„é¢„æœŸå†…å®¹ã€‚
+ * <p>ÒÔÏÂÄ£Ê½Æ¬¶ÎÖ¸¶¨°üº¬ÔÚ´ËÀàÖĞµÄÔ¤ÆÚÄÚÈİ¡£
  * 
  * <pre>
- * &lt;complexType name="addArticle">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="loginProperty" type="{http://service.webservice.eps.huilan.com/}loginProperty" minOccurs="0"/>
- *         &lt;element name="columnId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="status" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="article" type="{http://service.webservice.eps.huilan.com/}article" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="addArticle"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="loginProperty" type="{http://service.webservice.eps.huilan.com/}loginProperty" minOccurs="0"/&gt;
+ *         &lt;element name="columnId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="status" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="article" type="{http://service.webservice.eps.huilan.com/}article" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -43,7 +43,7 @@ public class AddArticle {
     protected Article article;
 
     /**
-     * è·å–loginPropertyå±æ€§çš„å€¼ã€‚
+     * »ñÈ¡loginPropertyÊôĞÔµÄÖµ¡£
      * 
      * @return
      *     possible object is
@@ -55,7 +55,7 @@ public class AddArticle {
     }
 
     /**
-     * è®¾ç½®loginPropertyå±æ€§çš„å€¼ã€‚
+     * ÉèÖÃloginPropertyÊôĞÔµÄÖµ¡£
      * 
      * @param value
      *     allowed object is
@@ -67,7 +67,7 @@ public class AddArticle {
     }
 
     /**
-     * è·å–columnIdå±æ€§çš„å€¼ã€‚
+     * »ñÈ¡columnIdÊôĞÔµÄÖµ¡£
      * 
      * @return
      *     possible object is
@@ -79,7 +79,7 @@ public class AddArticle {
     }
 
     /**
-     * è®¾ç½®columnIdå±æ€§çš„å€¼ã€‚
+     * ÉèÖÃcolumnIdÊôĞÔµÄÖµ¡£
      * 
      * @param value
      *     allowed object is
@@ -91,7 +91,7 @@ public class AddArticle {
     }
 
     /**
-     * è·å–statuså±æ€§çš„å€¼ã€‚
+     * »ñÈ¡statusÊôĞÔµÄÖµ¡£
      * 
      * @return
      *     possible object is
@@ -103,7 +103,7 @@ public class AddArticle {
     }
 
     /**
-     * è®¾ç½®statuså±æ€§çš„å€¼ã€‚
+     * ÉèÖÃstatusÊôĞÔµÄÖµ¡£
      * 
      * @param value
      *     allowed object is
@@ -115,7 +115,7 @@ public class AddArticle {
     }
 
     /**
-     * è·å–articleå±æ€§çš„å€¼ã€‚
+     * »ñÈ¡articleÊôĞÔµÄÖµ¡£
      * 
      * @return
      *     possible object is
@@ -127,7 +127,7 @@ public class AddArticle {
     }
 
     /**
-     * è®¾ç½®articleå±æ€§çš„å€¼ã€‚
+     * ÉèÖÃarticleÊôĞÔµÄÖµ¡£
      * 
      * @param value
      *     allowed object is

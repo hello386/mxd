@@ -6,7 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>NutzBook demo</title>
 <!-- 导入jquery -->
-<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="${base}/js/jquery.min.js"></script>
+
 <!-- 把user id复制到一个js变量 -->
 <script type="text/javascript">
     var me = '<%=session.getAttribute("me") %>';
@@ -22,10 +23,11 @@
                 },
                 dataType:"json",
                 success: function(data) {
-                    alert(data);
+                   // alert(data);
                     if (data == true) {
-                        alert("登陆成功");
-                        location.reload();
+                        //alert("登陆成功");
+                        //location.reload();
+                        location.href= base + "/service/";
                     } else {
                         alert("登陆失败,请检查账号密码")
                     }
@@ -48,7 +50,7 @@
 <div id="login_div">
     <form action="#" id="loginForm" method="post">
         用户名 <input name="username" type="text" value="admin">
-        密码 <input name="password" type="password" value="123456">
+        密码 <input name="password" type="password" value="admin">
         <button id="login_button">提交</button>
     </form>
 </div>

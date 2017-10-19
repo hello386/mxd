@@ -10,52 +10,52 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>article complex typeï¿½ï¿½ Java ï¿½à¡£
+ * <p>article complex typeµÄ Java Àà¡£
  * 
- * <p>ï¿½ï¿½ï¿½ï¿½Ä£Ê½Æ¬ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½Ðµï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½
+ * <p>ÒÔÏÂÄ£Ê½Æ¬¶ÎÖ¸¶¨°üº¬ÔÚ´ËÀàÖÐµÄÔ¤ÆÚÄÚÈÝ¡£
  * 
  * <pre>
- * &lt;complexType name="article">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="attachment" type="{http://service.webservice.eps.huilan.com/}attachment" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="resultMap">
- *           &lt;complexType>
- *             &lt;complexContent>
- *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                 &lt;sequence>
- *                   &lt;element name="entry" maxOccurs="unbounded" minOccurs="0">
- *                     &lt;complexType>
- *                       &lt;complexContent>
- *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                           &lt;sequence>
- *                             &lt;element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *                             &lt;element name="value" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *                           &lt;/sequence>
- *                         &lt;/restriction>
- *                       &lt;/complexContent>
- *                     &lt;/complexType>
- *                   &lt;/element>
- *                 &lt;/sequence>
- *               &lt;/restriction>
- *             &lt;/complexContent>
- *           &lt;/complexType>
- *         &lt;/element>
- *         &lt;element name="status" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="statusInfo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="article"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="attachmentList" type="{http://service.webservice.eps.huilan.com/}attachment" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="resultMap"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;complexContent&gt;
+ *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *                 &lt;sequence&gt;
+ *                   &lt;element name="entry" maxOccurs="unbounded" minOccurs="0"&gt;
+ *                     &lt;complexType&gt;
+ *                       &lt;complexContent&gt;
+ *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *                           &lt;sequence&gt;
+ *                             &lt;element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *                             &lt;element name="value" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *                           &lt;/sequence&gt;
+ *                         &lt;/restriction&gt;
+ *                       &lt;/complexContent&gt;
+ *                     &lt;/complexType&gt;
+ *                   &lt;/element&gt;
+ *                 &lt;/sequence&gt;
+ *               &lt;/restriction&gt;
+ *             &lt;/complexContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="status" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="statusInfo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "article", propOrder = {
-    "attachment",
+    "attachmentList",
     "key",
     "resultMap",
     "status",
@@ -64,7 +64,7 @@ import javax.xml.bind.annotation.XmlType;
 public class Article {
 
     @XmlElement(nillable = true)
-    protected List<Attachment> attachment;
+    protected List<Attachment> attachmentList;
     protected String key;
     @XmlElement(required = true)
     protected Article.ResultMap resultMap;
@@ -72,18 +72,18 @@ public class Article {
     protected String statusInfo;
 
     /**
-     * Gets the value of the attachment property.
+     * Gets the value of the attachmentList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the attachment property.
+     * This is why there is not a <CODE>set</CODE> method for the attachmentList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAttachment().add(newItem);
+     *    getAttachmentList().add(newItem);
      * </pre>
      * 
      * 
@@ -93,15 +93,15 @@ public class Article {
      * 
      * 
      */
-    public List<Attachment> getAttachment() {
-        if (attachment == null) {
-            attachment = new ArrayList<Attachment>();
+    public List<Attachment> getAttachmentList() {
+        if (attachmentList == null) {
+            attachmentList = new ArrayList<Attachment>();
         }
-        return this.attachment;
+        return this.attachmentList;
     }
 
     /**
-     * ï¿½ï¿½È¡keyï¿½ï¿½ï¿½Ôµï¿½Öµï¿½ï¿½
+     * »ñÈ¡keyÊôÐÔµÄÖµ¡£
      * 
      * @return
      *     possible object is
@@ -113,7 +113,7 @@ public class Article {
     }
 
     /**
-     * ï¿½ï¿½ï¿½ï¿½keyï¿½ï¿½ï¿½Ôµï¿½Öµï¿½ï¿½
+     * ÉèÖÃkeyÊôÐÔµÄÖµ¡£
      * 
      * @param value
      *     allowed object is
@@ -125,7 +125,7 @@ public class Article {
     }
 
     /**
-     * ï¿½ï¿½È¡resultMapï¿½ï¿½ï¿½Ôµï¿½Öµï¿½ï¿½
+     * »ñÈ¡resultMapÊôÐÔµÄÖµ¡£
      * 
      * @return
      *     possible object is
@@ -137,7 +137,7 @@ public class Article {
     }
 
     /**
-     * ï¿½ï¿½ï¿½ï¿½resultMapï¿½ï¿½ï¿½Ôµï¿½Öµï¿½ï¿½
+     * ÉèÖÃresultMapÊôÐÔµÄÖµ¡£
      * 
      * @param value
      *     allowed object is
@@ -149,7 +149,7 @@ public class Article {
     }
 
     /**
-     * ï¿½ï¿½È¡statusï¿½ï¿½ï¿½Ôµï¿½Öµï¿½ï¿½
+     * »ñÈ¡statusÊôÐÔµÄÖµ¡£
      * 
      * @return
      *     possible object is
@@ -161,7 +161,7 @@ public class Article {
     }
 
     /**
-     * ï¿½ï¿½ï¿½ï¿½statusï¿½ï¿½ï¿½Ôµï¿½Öµï¿½ï¿½
+     * ÉèÖÃstatusÊôÐÔµÄÖµ¡£
      * 
      * @param value
      *     allowed object is
@@ -173,7 +173,7 @@ public class Article {
     }
 
     /**
-     * ï¿½ï¿½È¡statusInfoï¿½ï¿½ï¿½Ôµï¿½Öµï¿½ï¿½
+     * »ñÈ¡statusInfoÊôÐÔµÄÖµ¡£
      * 
      * @return
      *     possible object is
@@ -185,7 +185,7 @@ public class Article {
     }
 
     /**
-     * ï¿½ï¿½ï¿½ï¿½statusInfoï¿½ï¿½ï¿½Ôµï¿½Öµï¿½ï¿½
+     * ÉèÖÃstatusInfoÊôÐÔµÄÖµ¡£
      * 
      * @param value
      *     allowed object is
@@ -198,31 +198,31 @@ public class Article {
 
 
     /**
-     * <p>anonymous complex typeï¿½ï¿½ Java ï¿½à¡£
+     * <p>anonymous complex typeµÄ Java Àà¡£
      * 
-     * <p>ï¿½ï¿½ï¿½ï¿½Ä£Ê½Æ¬ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½Ðµï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½
+     * <p>ÒÔÏÂÄ£Ê½Æ¬¶ÎÖ¸¶¨°üº¬ÔÚ´ËÀàÖÐµÄÔ¤ÆÚÄÚÈÝ¡£
      * 
      * <pre>
-     * &lt;complexType>
-     *   &lt;complexContent>
-     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *       &lt;sequence>
-     *         &lt;element name="entry" maxOccurs="unbounded" minOccurs="0">
-     *           &lt;complexType>
-     *             &lt;complexContent>
-     *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *                 &lt;sequence>
-     *                   &lt;element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-     *                   &lt;element name="value" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-     *                 &lt;/sequence>
-     *               &lt;/restriction>
-     *             &lt;/complexContent>
-     *           &lt;/complexType>
-     *         &lt;/element>
-     *       &lt;/sequence>
-     *     &lt;/restriction>
-     *   &lt;/complexContent>
-     * &lt;/complexType>
+     * &lt;complexType&gt;
+     *   &lt;complexContent&gt;
+     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+     *       &lt;sequence&gt;
+     *         &lt;element name="entry" maxOccurs="unbounded" minOccurs="0"&gt;
+     *           &lt;complexType&gt;
+     *             &lt;complexContent&gt;
+     *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+     *                 &lt;sequence&gt;
+     *                   &lt;element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+     *                   &lt;element name="value" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+     *                 &lt;/sequence&gt;
+     *               &lt;/restriction&gt;
+     *             &lt;/complexContent&gt;
+     *           &lt;/complexType&gt;
+     *         &lt;/element&gt;
+     *       &lt;/sequence&gt;
+     *     &lt;/restriction&gt;
+     *   &lt;/complexContent&gt;
+     * &lt;/complexType&gt;
      * </pre>
      * 
      * 
@@ -266,21 +266,21 @@ public class Article {
 
 
         /**
-         * <p>anonymous complex typeï¿½ï¿½ Java ï¿½à¡£
+         * <p>anonymous complex typeµÄ Java Àà¡£
          * 
-         * <p>ï¿½ï¿½ï¿½ï¿½Ä£Ê½Æ¬ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½Ðµï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½
+         * <p>ÒÔÏÂÄ£Ê½Æ¬¶ÎÖ¸¶¨°üº¬ÔÚ´ËÀàÖÐµÄÔ¤ÆÚÄÚÈÝ¡£
          * 
          * <pre>
-         * &lt;complexType>
-         *   &lt;complexContent>
-         *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-         *       &lt;sequence>
-         *         &lt;element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-         *         &lt;element name="value" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-         *       &lt;/sequence>
-         *     &lt;/restriction>
-         *   &lt;/complexContent>
-         * &lt;/complexType>
+         * &lt;complexType&gt;
+         *   &lt;complexContent&gt;
+         *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+         *       &lt;sequence&gt;
+         *         &lt;element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+         *         &lt;element name="value" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+         *       &lt;/sequence&gt;
+         *     &lt;/restriction&gt;
+         *   &lt;/complexContent&gt;
+         * &lt;/complexType&gt;
          * </pre>
          * 
          * 
@@ -296,7 +296,7 @@ public class Article {
             protected String value;
 
             /**
-             * ï¿½ï¿½È¡keyï¿½ï¿½ï¿½Ôµï¿½Öµï¿½ï¿½
+             * »ñÈ¡keyÊôÐÔµÄÖµ¡£
              * 
              * @return
              *     possible object is
@@ -308,7 +308,7 @@ public class Article {
             }
 
             /**
-             * ï¿½ï¿½ï¿½ï¿½keyï¿½ï¿½ï¿½Ôµï¿½Öµï¿½ï¿½
+             * ÉèÖÃkeyÊôÐÔµÄÖµ¡£
              * 
              * @param value
              *     allowed object is
@@ -320,7 +320,7 @@ public class Article {
             }
 
             /**
-             * ï¿½ï¿½È¡valueï¿½ï¿½ï¿½Ôµï¿½Öµï¿½ï¿½
+             * »ñÈ¡valueÊôÐÔµÄÖµ¡£
              * 
              * @return
              *     possible object is
@@ -332,7 +332,7 @@ public class Article {
             }
 
             /**
-             * ï¿½ï¿½ï¿½ï¿½valueï¿½ï¿½ï¿½Ôµï¿½Öµï¿½ï¿½
+             * ÉèÖÃvalueÊôÐÔµÄÖµ¡£
              * 
              * @param value
              *     allowed object is
@@ -342,26 +342,9 @@ public class Article {
             public void setValue(String value) {
                 this.value = value;
             }
-        	public Entry() {
-				super();
-			}
-			public Entry(String key, String value) {
-				super();
-				this.key = key;
-				this.value = value;
-			}
+
         }
 
     }
-	public Article() {
-		super();
-	}
 
-	public Article(ResultMap resultMap, String status, String statusInfo) {
-		super();
-		this.resultMap = resultMap;
-		this.status = status;
-		this.statusInfo = statusInfo;
-	}
-    
 }

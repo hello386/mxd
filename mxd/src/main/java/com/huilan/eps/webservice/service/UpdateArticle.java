@@ -7,25 +7,25 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>updateArticle complex type锟斤拷 Java 锟洁。
+ * <p>updateArticle complex type的 Java 类。
  * 
- * <p>锟斤拷锟斤拷模式片锟斤拷指锟斤拷锟斤拷锟节达拷锟斤拷锟叫碉拷预锟斤拷锟斤拷锟捷★拷
+ * <p>以下模式片段指定包含在此类中的预期内容。
  * 
  * <pre>
- * &lt;complexType name="updateArticle">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="loginProperty" type="{http://service.webservice.eps.huilan.com/}loginProperty" minOccurs="0"/>
- *         &lt;element name="columnId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="status" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="article" type="{http://service.webservice.eps.huilan.com/}article" minOccurs="0"/>
- *         &lt;element name="pk" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="pkValue" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="updateArticle"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="loginProperty" type="{http://service.webservice.eps.huilan.com/}loginProperty" minOccurs="0"/&gt;
+ *         &lt;element name="columnId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="status" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="article" type="{http://service.webservice.eps.huilan.com/}article" minOccurs="0"/&gt;
+ *         &lt;element name="pk" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="pkValue" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -49,7 +49,7 @@ public class UpdateArticle {
     protected String pkValue;
 
     /**
-     * 锟斤拷取loginProperty锟斤拷锟皆碉拷值锟斤拷
+     * 获取loginProperty属性的值。
      * 
      * @return
      *     possible object is
@@ -61,7 +61,7 @@ public class UpdateArticle {
     }
 
     /**
-     * 锟斤拷锟斤拷loginProperty锟斤拷锟皆碉拷值锟斤拷
+     * 设置loginProperty属性的值。
      * 
      * @param value
      *     allowed object is
@@ -73,7 +73,7 @@ public class UpdateArticle {
     }
 
     /**
-     * 锟斤拷取columnId锟斤拷锟皆碉拷值锟斤拷
+     * 获取columnId属性的值。
      * 
      * @return
      *     possible object is
@@ -85,7 +85,7 @@ public class UpdateArticle {
     }
 
     /**
-     * 锟斤拷锟斤拷columnId锟斤拷锟皆碉拷值锟斤拷
+     * 设置columnId属性的值。
      * 
      * @param value
      *     allowed object is
@@ -97,7 +97,7 @@ public class UpdateArticle {
     }
 
     /**
-     * 锟斤拷取status锟斤拷锟皆碉拷值锟斤拷
+     * 获取status属性的值。
      * 
      * @return
      *     possible object is
@@ -109,7 +109,7 @@ public class UpdateArticle {
     }
 
     /**
-     * 锟斤拷锟斤拷status锟斤拷锟皆碉拷值锟斤拷
+     * 设置status属性的值。
      * 
      * @param value
      *     allowed object is
@@ -121,7 +121,7 @@ public class UpdateArticle {
     }
 
     /**
-     * 锟斤拷取article锟斤拷锟皆碉拷值锟斤拷
+     * 获取article属性的值。
      * 
      * @return
      *     possible object is
@@ -133,7 +133,7 @@ public class UpdateArticle {
     }
 
     /**
-     * 锟斤拷锟斤拷article锟斤拷锟皆碉拷值锟斤拷
+     * 设置article属性的值。
      * 
      * @param value
      *     allowed object is
@@ -145,7 +145,7 @@ public class UpdateArticle {
     }
 
     /**
-     * 锟斤拷取pk锟斤拷锟皆碉拷值锟斤拷
+     * 获取pk属性的值。
      * 
      * @return
      *     possible object is
@@ -157,7 +157,7 @@ public class UpdateArticle {
     }
 
     /**
-     * 锟斤拷锟斤拷pk锟斤拷锟皆碉拷值锟斤拷
+     * 设置pk属性的值。
      * 
      * @param value
      *     allowed object is
@@ -169,7 +169,7 @@ public class UpdateArticle {
     }
 
     /**
-     * 锟斤拷取pkValue锟斤拷锟皆碉拷值锟斤拷
+     * 获取pkValue属性的值。
      * 
      * @return
      *     possible object is
@@ -181,7 +181,7 @@ public class UpdateArticle {
     }
 
     /**
-     * 锟斤拷锟斤拷pkValue锟斤拷锟皆碉拷值锟斤拷
+     * 设置pkValue属性的值。
      * 
      * @param value
      *     allowed object is

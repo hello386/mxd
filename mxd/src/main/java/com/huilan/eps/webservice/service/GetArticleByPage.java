@@ -12,20 +12,20 @@ import javax.xml.bind.annotation.XmlType;
  * <p>以下模式片段指定包含在此类中的预期内容。
  * 
  * <pre>
- * &lt;complexType name="getArticleByPage">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="loginProperty" type="{http://service.webservice.eps.huilan.com/}loginProperty" minOccurs="0"/>
- *         &lt;element name="columnId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="pageNo" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="pageSize" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="queryContent" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
- *         &lt;element name="parameter" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="getArticleByPage"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="loginProperty" type="{http://service.webservice.eps.huilan.com/}loginProperty" minOccurs="0"/&gt;
+ *         &lt;element name="columnId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="pageNo" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="pageSize" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="queryContent" type="{http://www.w3.org/2001/XMLSchema}boolean"/&gt;
+ *         &lt;element name="parameter" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
