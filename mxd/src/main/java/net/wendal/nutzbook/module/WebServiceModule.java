@@ -67,7 +67,7 @@ public class WebServiceModule {
     public Object userMgrSite(@Attr("me")int me) {
 		 User user = dao.fetch(User.class, Cnd.where("id", "=", me));
 		 
-		   NutMap re = new NutMap();
+		   //NutMap re = new NutMap();
 		    
 		   LoginProperty property = new LoginProperty(user.getName(),user.getPassword()); //登陆验证
 			SiteInfos siteInfos = siteService.getSiteByUser(property, "-1");
@@ -114,10 +114,7 @@ public class WebServiceModule {
 	 */
 	private List<SiteMenu> getChild(String parentId,User user) {
 		
-		/* SiteWSServiceImplService service=new SiteWSServiceImplService();
-			SiteWSService siteService=service.getSiteWSServiceImplPort();*/
 			LoginProperty property = new LoginProperty(user.getName(),user.getPassword()); //登陆验证
-			
 			SiteInfos siteInfos = siteService.getSiteByUser(property, parentId);
 			List<UserMgrSite> ums =  siteInfos.getSiteList();
 			
@@ -176,12 +173,10 @@ public class WebServiceModule {
 	public Object getPageTreeNode(@Param("parentId") String parentId,@Param("siteId") String siteId,@Attr("me")int me) {
 		
 		   User user = dao.fetch(User.class, Cnd.where("id", "=", me));
-		  
 		   LoginProperty property = new LoginProperty(user.getName(),user.getPassword()); //登陆验证
 		   String userId = getUserId(user);
 		   //pageWSService.getPageTreeNode(property, parentId, siteId, user.getId());
 		   List<VoCommonPage> voCommonPage=   pageWSService.getPageTreeNode(property, parentId, siteId, userId);
-		System.out.println("-----------------------------"+voCommonPage.size());
 		
 		       // 最后的结果
 					List<ColumnMenu> menuList  = new ArrayList<ColumnMenu>();
