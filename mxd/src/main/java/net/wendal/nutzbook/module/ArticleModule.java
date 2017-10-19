@@ -70,11 +70,8 @@ public class ArticleModule {
 			HashMap<String,Object> kvMap = new HashMap<String,Object>();
 			List<MapEntry> entrys = mapConvertor.getEntries();
 			for (MapEntry mapEntry : entrys) {
-				
-				//System.out.println(mapEntry.getKey()+"***"+mapEntry.getValue());
 				kvMap.put(mapEntry.getKey(), mapEntry.getValue());
 			}
-			//retList.add(kvMap);
 			retList.add(kvMap);
 		}
 		re.setv("rows", retList);
