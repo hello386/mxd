@@ -10,7 +10,7 @@
 
 <!-- 把user id复制到一个js变量 -->
 <script type="text/javascript">
-    var me = '<%=session.getAttribute("me") %>';
+    var me = '${me.userId}';
     var base = '${base}';
     $(function() {
         $("#login_button").click(function() {
@@ -35,7 +35,7 @@
             });
             return false;
         });
-        if (me != "null") {
+        if (me != "") {
             $("#login_div").hide();
             $("#userInfo").html("您的Id是" + me);
             $("#user_info_div").show();

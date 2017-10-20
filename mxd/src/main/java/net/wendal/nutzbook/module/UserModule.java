@@ -30,7 +30,7 @@ import net.wendal.nutzbook.bean.User;
 @Filters(@By(type=CheckSession.class, args={"me", "/"}))
 public class UserModule {
 	@Inject
-    protected Dao dao; // 灏辫繖涔堟敞鍏ヤ簡,鏈堾IocBean瀹冩墠浼氱敓鏁�
+    protected Dao dao; //
 	
 	@At
     public int count() {
@@ -43,7 +43,8 @@ public class UserModule {
         if (user == null) {
             return false;
         } else {
-            session.setAttribute("me", user.getId());
+           // session.setAttribute("me", user.getUserId());
+        	 session.setAttribute("me", user);
             return true;
         }
     }
@@ -112,8 +113,8 @@ public class UserModule {
     }
 	
 	@At
-    public Object delete(@Param("id")int id, @Attr("me")int me) {
-        if (me == id) {
+    public Object delete(@Param("id")int id, @Attr("me")User me) {
+        if (me.getId() == id) {
             return new NutMap().setv("ok", false).setv("msg", "不能删除当前用户!!");
         }
         dao.delete(User.class, id); // 再严谨一些的话,需要判断是否为>0

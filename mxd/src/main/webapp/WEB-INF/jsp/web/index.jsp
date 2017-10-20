@@ -15,7 +15,7 @@
 <script type="text/javascript" src="${base}/js/index.js"></script>
 
 <script type="text/javascript">
-var me = '<%=session.getAttribute("me") %>';
+var me = '${me.userId}';
 var base = '${base}';
 </script>
 </head>

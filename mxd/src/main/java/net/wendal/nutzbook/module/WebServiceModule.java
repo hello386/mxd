@@ -64,12 +64,12 @@ public class WebServiceModule {
 	 * @return
 	 */
 	@At
-    public Object userMgrSite(@Attr("me")int me) {
-		 User user = dao.fetch(User.class, Cnd.where("id", "=", me));
+    public Object userMgrSite(@Attr("me")User me) {
+		 //User user = dao.fetch(User.class, Cnd.where("id", "=", me));
 		 
 		   //NutMap re = new NutMap();
 		    
-		   LoginProperty property = new LoginProperty(user.getName(),user.getPassword()); //登陆验证
+		   LoginProperty property = new LoginProperty(me.getName(),me.getPassword()); //登陆验证
 			SiteInfos siteInfos = siteService.getSiteByUser(property, "-1");
 			
 			List<UserMgrSite> ums =  siteInfos.getSiteList();
@@ -91,7 +91,7 @@ public class WebServiceModule {
 			// 为一级菜单设置子菜单，getChild是递归调用的
 			 for (SiteMenu menu : menuList) {
 				 if(menu.getLeaf().equals("0")) {//不是叶子 有子节点
-					 menu.setChildren(getChild(menu.getId(),user));
+					 menu.setChildren(getChild(menu.getId(),me));
 				 }
 			  }
 			 
@@ -159,7 +159,7 @@ public class WebServiceModule {
 		 /*LoginProperty property = new LoginProperty(user.getName(),user.getPassword()); //登陆验证
 		 UserInfos  userinfos=   userLoginService.login(property, param);
 		String userid =  userinfos.getUserInfo().getId();*/
-		   return user.getId()+"";
+		   return user.getUserId();
 	}
 	
 	//-------------------------------------
@@ -170,11 +170,11 @@ public class WebServiceModule {
 	 */
 	
 	@At
-	public Object getPageTreeNode(@Param("parentId") String parentId,@Param("siteId") String siteId,@Attr("me")int me) {
+	public Object getPageTreeNode(@Param("parentId") String parentId,@Param("siteId") String siteId,@Attr("me")User me) {
 		
-		   User user = dao.fetch(User.class, Cnd.where("id", "=", me));
-		   LoginProperty property = new LoginProperty(user.getName(),user.getPassword()); //登陆验证
-		   String userId = getUserId(user);
+		  // User user = dao.fetch(User.class, Cnd.where("id", "=", me));
+		   LoginProperty property = new LoginProperty(me.getName(),me.getPassword()); //登陆验证
+		   String userId = getUserId(me);
 		   //pageWSService.getPageTreeNode(property, parentId, siteId, user.getId());
 		   List<VoCommonPage> voCommonPage=   pageWSService.getPageTreeNode(property, parentId, siteId, userId);
 		    System.out.println("-------------------parentId-"+parentId);
@@ -195,7 +195,7 @@ public class WebServiceModule {
 					// 为一级菜单设置子菜单，getChild是递归调用的
 					 for (ColumnMenu menu : menuList) {
 						 if(!menu.isLeaf()) {//不是叶子 有子节点
-							 menu.setChildren(getColumnChild(menu.getId(),siteId,user));
+							 menu.setChildren(getColumnChild(menu.getId(),siteId,me));
 						 }
 					  }
 					 return menuList;

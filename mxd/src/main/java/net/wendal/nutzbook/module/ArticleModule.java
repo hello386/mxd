@@ -55,11 +55,11 @@ public class ArticleModule {
 	 */
 	@At
 	public Object getArticleByPage(@Param("columnId") String columnId, @Param("page") int pageNo,
-			@Param("rows") int pageSize, @Attr("me") int me) {
+			@Param("rows") int pageSize, @Attr("me") User me) {
 
 		NutMap re = new NutMap();
-		User user = dao.fetch(User.class, Cnd.where("id", "=", me));
-		LoginProperty property = new LoginProperty(user.getName(), user.getPassword()); // 登陆验证
+		//User user = dao.fetch(User.class, Cnd.where("id", "=", me));
+		LoginProperty property = new LoginProperty(me.getName(), me.getPassword()); // 登陆验证
 
 		ArticlePage articlePage = articleService.getArticleByPage(property, columnId, pageNo, pageSize, true, null);
 		re.setv("columnId", articlePage.getColumnId()).setv("pageNo", articlePage.getPageNo())
@@ -91,10 +91,10 @@ public class ArticleModule {
 	 * @return
 	 */
 	@At
-	public Object delArticle(@Param("columnId") String columnId, @Param("key") String key, @Attr("me") int me) {
+	public Object delArticle(@Param("columnId") String columnId, @Param("key") String key, @Attr("me") User me) {
 
-		User user = dao.fetch(User.class, Cnd.where("id", "=", me));
-		LoginProperty property = new LoginProperty(user.getName(), user.getPassword()); // 登陆验证
+		//User user = dao.fetch(User.class, Cnd.where("id", "=", me));
+		LoginProperty property = new LoginProperty(me.getName(), me.getPassword()); // 登陆验证
 		ResultMap rm = new ResultMap();// 文章表单中字段名及值放到这个map中，字段名要跟表单中字段名大小写一致
 		Article article = new Article(rm, "", "");
 		Article art = articleService.deleteArticle(property, columnId, article, "KEY", key);
@@ -107,11 +107,11 @@ public class ArticleModule {
 	 * 获取一篇文章
 	 */
 	@At
-	//@Ok("jsp:jsp.web.show")
-	public Object getArticle(@Param("columnId") String columnId, @Param("key") String key, @Attr("me") int me) {
+	@Ok("jsp:jsp.web.show")
+	public Object getArticle(@Param("columnId") String columnId, @Param("key") String key, @Attr("me") User me) {
 
-		User user = dao.fetch(User.class, Cnd.where("id", "=", me));
-		LoginProperty property = new LoginProperty(user.getName(), user.getPassword()); // 登陆验证
+		//User user = dao.fetch(User.class, Cnd.where("id", "=", me));
+		LoginProperty property = new LoginProperty(me.getName(), me.getPassword()); // 登陆验证
 		ResultMap rm = new ResultMap();// 文章表单中字段名及值放到这个map中，字段名要跟表单中字段名大小写一致
 
 		Article art = articleService.getArticleByKey(property, key, columnId);
@@ -132,12 +132,12 @@ public class ArticleModule {
 	@At
 	public Object addArticle(@Param("columnId") String columnId, @Param("status") String status,
 			@Param("title") String title, @Param("content") String content, 
-			@Param("entityType") String entityType,@Param("entieyUrl") String entieyUrl, @Attr("me") int me) {
-		User user = dao.fetch(User.class, Cnd.where("id", "=", me));
-		LoginProperty property = new LoginProperty(user.getName(), user.getPassword()); // 登陆验证
+			@Param("entityType") String entityType,@Param("entieyUrl") String entieyUrl, @Attr("me") User me) {
+		//User user = dao.fetch(User.class, Cnd.where("id", "=", me));
+		LoginProperty property = new LoginProperty(me.getName(), me.getPassword()); // 登陆验证
 		ResultMap rm = new ResultMap();//文章表单中字段名及值放到这个map中，字段名要跟表单中字段名大小写一致
 		
-		Entry EDITOR_ID = new Entry("EDITOR_ID",me+"");
+		Entry EDITOR_ID = new Entry("EDITOR_ID",me.getUserId());
 		Entry ENTITY_TYPE = new Entry("ENTITY_TYPE",entityType);
 		Entry TITLE = new Entry("TITLE", title);//标题
 		if(entityType.equals("HTML")) {

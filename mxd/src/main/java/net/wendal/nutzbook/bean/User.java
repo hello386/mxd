@@ -22,6 +22,9 @@ public class User {
     private Date createTime;
     @Column("ut")
     private Date updateTime;
+    @Column("user_id")
+    private String userId;
+    
 	public int getId() {
 		return id;
 	}
@@ -57,6 +60,12 @@ public class User {
 	}
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
     
     

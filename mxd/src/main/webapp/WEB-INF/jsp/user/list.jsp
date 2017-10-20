@@ -23,7 +23,7 @@
                 for (var i=0;i<data.list.length;i++) {
                     var user = data.list[i];
                     console.log(user);
-                    var tmp = "\n<p>" + user.id + " " + user.name
+                    var tmp = "\n<p>" + user.id + " " + user.name+"   userId:"+user.userId
                               + " <button onclick='user_update(" + user.id +");'>修改</button> "
                               + " <button onclick='user_delete(" + user.id +");'>删除</button> "
                               + "</p>";
@@ -113,6 +113,7 @@
     <form action="#" id="user_add_form">
         用户名<input name="name">
         密码<input name="password">
+        user_id<input name="userId">
     </form>
     <button id="user_add_btn">新增</button>
 </div>
