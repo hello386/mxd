@@ -81,7 +81,7 @@ public class WebServiceModule {
 					SiteMenu sm = new SiteMenu();
 					sm.setId(siteMenu.getId());
 					sm.setParentId("-1");
-					sm.setText("站点-"+siteMenu.getSiteName());
+					sm.setText(siteMenu.getSiteName());
 					sm.setLeaf(siteMenu.getLeaf());
 					sm.setUserMgrSite(siteMenu);
 					menuList.add(sm);
@@ -177,15 +177,15 @@ public class WebServiceModule {
 		   String userId = getUserId(user);
 		   //pageWSService.getPageTreeNode(property, parentId, siteId, user.getId());
 		   List<VoCommonPage> voCommonPage=   pageWSService.getPageTreeNode(property, parentId, siteId, userId);
-		
+		    System.out.println("-------------------parentId-"+parentId);
 		       // 最后的结果
 					List<ColumnMenu> menuList  = new ArrayList<ColumnMenu>();
 					// 先找到所有的一级站点菜单
 					for (VoCommonPage voPage : voCommonPage) {
 						ColumnMenu sm = new ColumnMenu();
 							sm.setId(voPage.getId());
-							sm.setParentId("-1");
-							sm.setText("栏目-"+voPage.getText());
+							sm.setParentId(parentId);
+							sm.setText(voPage.getText());
 							sm.setLeaf(voPage.isLeaf());
 							sm.setVoCommonPage(voPage);
 							menuList.add(sm);
@@ -225,7 +225,7 @@ public class WebServiceModule {
 			ColumnMenu sm = new ColumnMenu();
 				sm.setId(voPage.getId());
 				sm.setParentId(parentId);
-				sm.setText("栏目-"+voPage.getText());
+				sm.setText(voPage.getText());
 				sm.setLeaf(voPage.isLeaf());
 				sm.setVoCommonPage(voPage);
 				childList.add(sm);

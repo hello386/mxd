@@ -11,6 +11,7 @@ public class ColumnMenu {
 		// 父菜单id
 	    private String parentId;
 	    private boolean leaf;
+	    private String pageKey;//栏目标识
 		private VoCommonPage voCommonPage;
 		// 子菜单
 	    private List<ColumnMenu> children;
@@ -51,6 +52,12 @@ public class ColumnMenu {
 		}
 		public void setLeaf(boolean leaf) {
 			this.leaf = leaf;
+		}
+		public String getPageKey() {
+			return pageKey;
+		}
+		public void setPageKey(String pageKey) {
+			this.pageKey = pageKey;
 		}
 		
 	    
