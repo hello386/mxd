@@ -42,6 +42,7 @@ $(function() {
 
 	$('#w').window('close');
 	$('#detailW').window('close');
+	
 
 	// 初始化编辑器
 	var E = window.wangEditor;
@@ -49,10 +50,12 @@ $(function() {
 	// 或者 var editor = new E( document.getElementById('#editor') )
 	editor.create();
 	// 隐藏输入url
-	$("#ENTITY_URL").hide();
+	//$("#url_tr").hide();
 	// 隐藏附件上传
-	$("#fileToUpload").hide();
+	//$("#fj_tr").hide();
 
+	//$("#fileToUpload").hide();
+	
 	$("#ENTITY_TYPE").change(function() {
 		var et = $(this).val();
 		entityTypeChang(et);
@@ -88,19 +91,19 @@ $(function() {
 
 function entityTypeChang(et){
 	if (et == "URL") {
-		$("#ENTITY_URL").show();
+		$("#url_tr").show();
 		$("#content").hide();
-		$("#fileToUpload").hide();
+		$("#fj_tr").hide();
 	}
 	if (et == "HTML") {
-		$("#ENTITY_URL").hide();
+		$("#url_tr").hide();
 		$("#content").show();
-		$("#fileToUpload").hide();
+		$("#fj_tr").hide();
 	}
 	if (et == "ATTACHMENT") {
-		$("#ENTITY_URL").hide();
+		$("#url_tr").hide();
 		$("#content").hide();
-		$("#fileToUpload").show();
+		$("#fj_tr").show();
 	}
 }
 
@@ -126,7 +129,7 @@ function initTable(url) {
 //显示添加文章
 function showAddArticle() {
 	$("#opt_type").val("add");
-	// 清空乘客里面的内容
+	// 清空里面的内容
 	cleanW();
 	var columnId = $("#columnId").val();
 	if (columnId == "") {
@@ -222,7 +225,10 @@ function editArticle() {
             	if(et=="ATTACHMENT"){
             		var filePathArr = data.article. ARTICLE_DYNIAMIC_URL.split("/");
             		var filename =filePathArr[filePathArr.length-1];
+            		$("#input_file_name").val(filename);
             		//$("#fileToUpload").val(filename);
+            		//alert(filename);
+            		//$("#fileToUpload").hide();
             	}
             	
             	
@@ -280,27 +286,45 @@ function showMsg(title, msg) {
 function cleanW() {
 	$("#title").val("");
 	editor.txt.html('');
-	$("#ENTITY_URL").val("");
+	$("#ENTITY_URL").val("http://");
 	$("#infosummary").val("");
 	$("#key").val("");
+	$("#ENTITY_TYPE").val("HTML");
+	$("#input_file_name").val("");
+	$("#filepath").val("");
+	$("#key").val("");
+	$("#input_file").html("<input   id='fileToUpload'   type='file'   name='fileToUpload' />");
 }
 
 function startUpload(){
+	$("#upload_btn").attr("disabled",true).html("上传中....."); 
         $.ajaxFileUpload({  
             url: base+'/article/upload',  
             secureuri:false,  
             fileElementId:'fileToUpload',//file标签的id  
             dataType: 'json',//返回数据的类型  
-            success: function (data, status) {  
+            success: function (data, status) { 
                 //把图片替换  
                // var obj = jQuery.parseJSON(data);  
                 //$("#upload").attr("src", "../image/"+obj.fileName);  
-            	var  filePath=data;
+            	var  filePath=data.path;
+            	var fileName=data.oldName;
             	//alert(filePath);
                $("#filepath").val(filePath);
-            },  
+               $("#upload_btn").attr("disabled",false).html("确定"); 
+               /*var filePathArr = filePath.split("/");
+              
+               if(filePathArr.length==1){
+            	   filePathArr = filePath.split("\\");
+               }
+       		   var filename =filePathArr[filePathArr.length-1];*/
+       		   $("#input_file_name").val(fileName);
+               showMsg("操作成功", "上传文件成功");
+               $('#selectFile').dialog('close');
+            }, 
             error: function (data, status, e) {  
                 alert(e);  
+                $("#upload_btn").attr("disabled",false).html("确定."); 
             }  
         });  
     
@@ -336,12 +360,20 @@ function startMovOrCopy(){
 	var  columnId = $("#columnId").val();
 	var to_columnId=$("#to_columnId").val();
 	var opt_type=$("#opt_type").val();
-	if(columnId == to_columnId){
-		alert("不能选择当前栏目");
-		return;
-	}
+	
 	var row = $('#dg').datagrid('getSelected');
 	if (row) {
+		
+		if(columnId == to_columnId){
+			//alert("不能选择当前栏目");
+			showMsg("错误", "不能选择当前栏目");
+			return;
+		}
+		if(to_columnId==""){
+			showMsg("错误", "请选择要移动到的栏目");
+			return;
+		}
+		
 		var optUrl = base + '/article/moveOrCopy?to_columnId=' + to_columnId
 				+ '&key=' + row.KEY+"&opt_type="+opt_type+"&columnId="+columnId;
 		console.log(optUrl);
@@ -353,8 +385,11 @@ function startMovOrCopy(){
 				showMsg("操作成功", result.statusInfo);
 				$('#dg').datagrid("reload", {});
 			}
+			$('#optW').window('close');
 		}, "json");
 	}else{
 		showMsg("错误", "请选择一行");
+		
 	}
+	
 }

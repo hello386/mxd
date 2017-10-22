@@ -29,6 +29,7 @@ var base = '${base}';
 <input type="hidden" id="opt_type"><!-- 操作类型：添加-add，更新-update   move-移动   copy-复制-->
 <input type="hidden" id="key"><!-- 编辑的时候 文章的 KEY -->
 <input type="hidden" id="siteEnname"><!-- 站点英文名字 保存附件的时候要用 -->
+
 <div style="margin:20px 0;"></div>
 <!-- <ul id="tt" class="easyui-tree"></ul> -->
 	
@@ -78,36 +79,71 @@ var base = '${base}';
 	</div>
 	
 	<!-- 弹出的窗口  编辑文章 -->
-	<div id="w" class="easyui-window" title="窗口"   style="width:900px;height:500px;padding:5px;"
+	<div id="w" class="easyui-window"  title="信息管理"   style="width:900px;height:500px;padding:5px;"
 	data-options="iconCls:'icon-save',collapsible:false,minimizable:false,maximizable:true,closable:true,modal:true">
 			
 		<div class="easyui-layout" data-options="fit:true"  >
+			<div data-options="region:'center',iconCls:'icon-ok'" title="文章编辑">
+			 <table>
+			    <tr>
+			       <td>标题：</td><td><input type="text" id=title></td><td></td>
+			    </tr>
+			    <tr>
+			       <td>文章类型：</td>
+			       <td>
+			         <select id="ENTITY_TYPE" name="ENTITY_TYPE"  >
+						   <option value="HTML">HTML</option>
+						  <option value="ATTACHMENT">附件</option> <!-- 我的tomcat不能传文件到crm上 只能传到自己服务器上 -->
+						   <option value="URL">URL</option>
+						 </select>
+			       </td><td></td>
+			    </tr>
+			    
+			     <tr id="fj_tr" style="display:none;">
+			       <td>附件：</td>
+			       <td id="file_td"><!-- <input   id="fileToUpload"   type="file"   name="fileToUpload"> --> 
+			          <input type="text" id="input_file_name">
+			       </td>
+			       <td><button onclick="$('#selectFile').dialog('open')">浏览</button></td>
+			    </tr>
+			    <tr id="url_tr" style="display:none;">
+			       <td>转向url：</td>
+			       <td><input type='text'  id ='ENTITY_URL'  name='ENTITY_URL'  value='http://'  /></td>
+			       <td></td>
+			    </tr>
+			    
+			 </table>
+			 
+			 <!-- 内容编辑 -->
+				<div id="content"  >
+			    </div>
+		</div>
+			<div data-options="region:'east',split:true" title="基本属性" style="width:180px;">
+			<table>
+			  <tr>
+			   <td>摘要：</td><td><textarea rows="" cols=""  id="infosummary"></textarea></td>
+			  </tr>
+			</table>
+			</div>
 			
-  标题：<input type="text" id=title>
+			
+<!--   标题：<input type="text" id=title>
    文章类型：
   <select id="ENTITY_TYPE" name="ENTITY_TYPE"  >
    <option value="HTML">HTML</option>
    
-  <option value="ATTACHMENT">附件</option> <!-- 我的tomcat不能传文件到crm上 只能传到自己服务器上 -->
+  <option value="ATTACHMENT">附件</option> 我的tomcat不能传文件到crm上 只能传到自己服务器上
    <option value="URL">URL</option>
-  </select>
-<input type='text' id ='ENTITY_URL' name='ENTITY_URL' class='eps-article-title-input' value='http://'/>
-<!-- 附件类型上传 -->
-<!-- 点击图片，打开文件选择器，确定，上传。(这是网络上的一个图片) -->  
-<input id="fileToUpload"   type="file"  name="fileToUpload"><button onclick="startUpload()">点击开始上传</button>
-<!-- 附件类型上传  end-->
-摘要：
-<textarea rows="" cols=""  id="infosummary"></textarea>
-<!-- 内容编辑 -->
-	<div id="content"  >
-    </div>
-    
-    <input id="saveandpublish" type="button" value="保存并发布" onclick="saveArticle()" />
-    
-			<!-- <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
-				<a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="javascript:alert('ok')" style="width:80px">Ok</a>
-				<a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="javascript:alert('cancel')" style="width:80px">Cancel</a>
-			</div> -->
+  </select> 
+  
+  <input type='text' id ='ENTITY_URL' name='ENTITY_URL' class='eps-article-title-input' value='http://'/>
+  <input id="fileToUpload"   type="file"  name="fileToUpload">
+<button id="upload_btn" onclick="startUpload()">点击开始上传</button>
+  -->
+        <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+					<a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="javascript:saveArticle()" style="width:100px">保存并发布</a>
+					<a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="javascript:$('#w').window('close');" style="width:80px">取消</a>
+		</div>
 		</div>
 	</div>
 	
@@ -147,6 +183,21 @@ var base = '${base}';
 			</div>
 		</div>
 	</div>
+	 
+	<div   id="selectFile" class="easyui-dialog"  style="width:400px;height:300px"
+		data-options="title:'My Dialog',buttons:'#selectFile_bb',modal:true,closed:true">
+	
+	<table >
+	  <tr>
+	   <td width="60%">附件文件：</td><td width="50%" id="input_file"><input   id="fileToUpload"   type="file"   name="fileToUpload"></td>
+	</tr>
+	</table>
+</div>
+<div id="selectFile_bb">
+	<a href="#" class="easyui-linkbutton"  onclick="startUpload()" id="upload_btn" >确定</a>
+	<a href="#" class="easyui-linkbutton" onclick="$('#selectFile').dialog('close')">取消</a>
+</div>
+	
 	
 </body>
 </html>

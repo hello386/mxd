@@ -236,13 +236,16 @@ public class ArticleModule {
 	@At("/upload")
 	@AdaptBy(type = UploadAdaptor.class, args = { "ioc:myUpload" })
 	public Object uploadFile(@Param("fileToUpload") TempFile tf, @Attr("me") User me) {
+		
 		File f = tf.getFile(); // 这个是保存的临时文件
 		FieldMeta meta = tf.getMeta(); // 这个原本的文件信息
 		String oldName = meta.getFileLocalName();
 		System.out.println(tf.getFile().getAbsolutePath() + " " + "&" + tf.getFile());
 		System.out.println("----------------------------------path==" + oldName);
 
-		return tf.getFile().getAbsolutePath();
+		NutMap re = new NutMap();
+		re.setv("oldName", oldName).setv("path", tf.getFile().getAbsolutePath());
+		return re;
 
 	}
 	
@@ -270,15 +273,8 @@ public class ArticleModule {
 		//获取文章
 		Article article = articleService.getArticleByKey(property, key, columnId);
 		System.out.println("=======获取文章成功==="+article.getStatusInfo());
-		/*rm = article.getResultMap();
-		Entry PAGE_KEY = new Entry("PAGE_KEY",null);//频道唯一标识
-		rm.getEntry().add(PAGE_KEY);
-		article = new Article(rm, "", "");*/
 		
-		//List<Entry> ents = rm.getEntry();
 		Article a_move=null;
-		//更新文章栏目
-		//Article art = articleService.updateArticle(property, to_columnId, "2", article, "KEY", key);
 		Article art = articleService.addArticle(property, to_columnId, "2", article);
 		System.out.println("======更新文章成功==="+art.getStatusInfo());
 		if(art.getStatus().equals("0")) {//更新文章成功
