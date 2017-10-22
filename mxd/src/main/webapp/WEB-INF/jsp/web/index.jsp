@@ -23,8 +23,10 @@ var base = '${base}';
 </head>
 <body>
 <input type="hidden" id="columnId">
+<input type="hidden" id="to_columnId"><!-- 要移动到或copy到的栏目 不能和当前栏目columnId相同 -->
+<input type="hidden" id="to_columnId_name"><!-- 要移动到或copy到的栏目  频道唯一标识 -->
 <input type="hidden" id="filepath">
-<input type="hidden" id="opt_type"><!-- 操作类型：添加-add，更新-update -->
+<input type="hidden" id="opt_type"><!-- 操作类型：添加-add，更新-update   move-移动   copy-复制-->
 <input type="hidden" id="key"><!-- 编辑的时候 文章的 KEY -->
 <input type="hidden" id="siteEnname"><!-- 站点英文名字 保存附件的时候要用 -->
 <div style="margin:20px 0;"></div>
@@ -68,7 +70,8 @@ var base = '${base}';
 	<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:showAddArticle()">添加</a>
 	<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="javascript:editArticle()">修改</a>
 	<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:delArticle()">删除</a>
-	<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:showOptArticle()">移动</a>
+	<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"  onclick='showOptArticle("move")'>移动</a>
+	<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"  onclick='showOptArticle("copy")'>复制</a>
 	<!-- <a href="#" class="easyui-linkbutton" iconCls="icon-more" plain="true" onclick="javascript:showArticle()">查看</a> -->
 </div>
 		</div>
@@ -76,7 +79,7 @@ var base = '${base}';
 	
 	<!-- 弹出的窗口  编辑文章 -->
 	<div id="w" class="easyui-window" title="窗口"   style="width:900px;height:500px;padding:5px;"
-	data-options="iconCls:'icon-save',collapsible:false,minimizable:false,maximizable:true,closable:true">
+	data-options="iconCls:'icon-save',collapsible:false,minimizable:false,maximizable:true,closable:true,modal:true">
 			
 		<div class="easyui-layout" data-options="fit:true"  >
 			
@@ -108,21 +111,40 @@ var base = '${base}';
 		</div>
 	</div>
 	
-	<div id="optW" class="easyui-window" title="窗口"   style="width:400px;height:300px;padding:5px;"
-	data-options="iconCls:'icon-save',collapsible:false,minimizable:false,maximizable:true,closable:true">
-			<!-- <div>注意：源频道不能当作目的频道，源频道与目的频道具有相同表单类型才能够完成文章的移动操作</div> -->
-		<div class="easyui-layout" data-options="fit:true"  >
-			<div data-options="region:'west',split:true,border:false"       title="站点"  style="width:200px"> 
-				   <ul id="optTree" class="easyui-tree"></ul>
-		    </div>
-			<div data-options="region:'center',split:true,border:false"    title="栏目"   style="width:0px">
-			    <ul id="optTree_coloum" class="easyui-tree"></ul>
+	<div id=optW class="easyui-window" title="Layout Window" icon="icon-help" 
+	   style="width:400px;height:250px;padding:5px;background: #fafafa;"
+	   data-options="modal:true,closed:true">
+		<div class="easyui-layout" fit="true">
+			<div region="west" split="true" style="width:200px;">
+				<ul class="easyui-tree" id="opt_site">
+					<!-- <li>
+						<span>Library</span>
+						<ul>
+							<li><span>easyui</span></li>
+							<li><span>Music</span></li>
+							<li><span>Picture</span></li>
+							<li><span>Database</span></li>
+						</ul>
+					</li> -->
+				</ul>
 			</div>
-    
-			<!-- <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
-				<a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="javascript:alert('ok')" style="width:80px">Ok</a>
-				<a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="javascript:alert('cancel')" style="width:80px">Cancel</a>
-			</div> -->
+			<div region="center" border="true"  split="true" style="width:200px;">
+				<ul class="easyui-tree" id="opt_col">
+					<!-- <li>
+						<span>Library</span>
+						<ul>
+							<li><span>easyui</span></li>
+							<li><span>Music</span></li>
+							<li><span>Picture</span></li>
+							<li><span>Database</span></li>
+						</ul>
+					</li> -->
+				</ul>
+			</div>
+			<div region="south" border="false" style="text-align:right;height:30px;line-height:30px;">
+				<a class="easyui-linkbutton" icon="icon-ok" href="javascript:startMovOrCopy()">确定</a>
+				<a class="easyui-linkbutton" icon="icon-cancel" href="javascript:$('#optW').window('close')">取消</a>
+			</div>
 		</div>
 	</div>
 	

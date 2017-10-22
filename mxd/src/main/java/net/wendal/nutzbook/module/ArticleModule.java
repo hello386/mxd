@@ -245,4 +245,58 @@ public class ArticleModule {
 		return tf.getFile().getAbsolutePath();
 
 	}
+	
+	/**
+	 * 移动 或复制一篇文章到to_columnId栏目
+	 * @param to_columnId 目的栏目id
+	 * @param key 文章key
+	 * @param columnId 文章原栏目id
+	 * @param opt_type  move或copy
+	 * @param me
+	 * @return
+	 */
+	@At
+	public Object moveOrCopy(@Param("to_columnId") String to_columnId, @Param("key") String key, @Param("columnId") String columnId, 
+			                                      @Param("opt_type") String opt_type ,@Attr("me") User me) {
+
+		System.out.println("===================to_columnId="+to_columnId+"====key="+key+"columnId="+columnId+"==opt_type="+opt_type);
+		NutMap re = new NutMap();
+		LoginProperty property = new LoginProperty(me.getName(), me.getPassword()); // 登陆验证
+		ResultMap rm = new ResultMap();// 文章表单中字段名及值放到这个map中，字段名要跟表单中字段名大小写一致
+
+		String statusInfo="操作成功";
+		String status="ok";
+		
+		//获取文章
+		Article article = articleService.getArticleByKey(property, key, columnId);
+		System.out.println("=======获取文章成功==="+article.getStatusInfo());
+		/*rm = article.getResultMap();
+		Entry PAGE_KEY = new Entry("PAGE_KEY",null);//频道唯一标识
+		rm.getEntry().add(PAGE_KEY);
+		article = new Article(rm, "", "");*/
+		
+		//List<Entry> ents = rm.getEntry();
+		Article a_move=null;
+		//更新文章栏目
+		//Article art = articleService.updateArticle(property, to_columnId, "2", article, "KEY", key);
+		Article art = articleService.addArticle(property, to_columnId, "2", article);
+		System.out.println("======更新文章成功==="+art.getStatusInfo());
+		if(art.getStatus().equals("0")) {//更新文章成功
+			if("move".equals(opt_type)) {//移动文章 要将原来的文章删除
+				 a_move = articleService.deleteArticle(property, columnId, article, "KEY", key);
+				 System.out.println("-----------------删除源文章 a_move  key =="+key+"===="+a_move.getStatusInfo());
+				 if(!a_move.getStatus().equals("0")) {
+					 statusInfo=a_move.getStatusInfo();
+					 status="err";
+				 }
+			}
+			
+		}else {
+			 statusInfo=art.getStatusInfo();
+			 status="err";
+		}
+		re.setv("status", status).setv("statusInfo", statusInfo);
+		return re;
+
+	}
 }

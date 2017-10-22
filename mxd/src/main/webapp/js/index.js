@@ -199,7 +199,11 @@ function editArticle() {
 	$("#opt_type").val("update");
 	cleanW();
 	var row = $('#dg').datagrid('getSelected');
+	//var rows = $('#dg').datagrid('getSelections');
+	
+	//if (rows && rows.length==1) {
 	if (row) {
+		//var row=rows[0];
 		$("#key").val(row.KEY);
 		var getUrl = base + '/article/getArticle?columnId=' + row.PAGE_ID
 		+ '&key=' + row.KEY;
@@ -300,4 +304,57 @@ function startUpload(){
             }  
         });  
     
+}
+//移动 复制 文章
+function showOptArticle(opt_type){
+	$("#opt_type").val(opt_type);
+	$('#opt_site').tree(
+			{
+				url : base + '/service/userMgrSite',
+				onClick : function(node) {
+					
+					//$("#siteEnname").val(node.userMgrSite.siteEnname);
+					var columUrl = base
+							+ '/service/getPageTreeNode?parentId=-1&siteId='
+							+ node.id;
+					console.log(columUrl);
+					$('#opt_col').tree(
+									{
+										url : columUrl,
+										onClick : function(node) {
+											$("#to_columnId").val(node.id);
+											$("#to_columnId_name").val(node.id);
+										}
+									});
+				}
+			});
+	
+	
+	$('#optW').window('open');
+}
+function startMovOrCopy(){
+	var  columnId = $("#columnId").val();
+	var to_columnId=$("#to_columnId").val();
+	var opt_type=$("#opt_type").val();
+	if(columnId == to_columnId){
+		alert("不能选择当前栏目");
+		return;
+	}
+	var row = $('#dg').datagrid('getSelected');
+	if (row) {
+		var optUrl = base + '/article/moveOrCopy?to_columnId=' + to_columnId
+				+ '&key=' + row.KEY+"&opt_type="+opt_type+"&columnId="+columnId;
+		console.log(optUrl);
+
+		$.get(optUrl, function(result) {
+			if (result.status != "ok") {
+				showMsg("错误", result.statusInfo);
+			} else {// 成功
+				showMsg("操作成功", result.statusInfo);
+				$('#dg').datagrid("reload", {});
+			}
+		}, "json");
+	}else{
+		showMsg("错误", "请选择一行");
+	}
 }
