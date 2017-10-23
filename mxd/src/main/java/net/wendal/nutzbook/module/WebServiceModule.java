@@ -73,7 +73,7 @@ public class WebServiceModule {
 			SiteInfos siteInfos = siteService.getSiteByUser(property, "-1");
 			
 			List<UserMgrSite> ums =  siteInfos.getSiteList();
-			// 最后的结果
+			// 最后返回的结果
 			List<SiteMenu> menuList  = new ArrayList<SiteMenu>();
 			// 先找到所有的一级站点菜单
 			for (UserMgrSite siteMenu : ums) {
@@ -202,7 +202,7 @@ public class WebServiceModule {
 	}
 	
 	/**
-	 * 递归查找子菜单
+	 * 递归查找栏目子菜单
 	 * 
 	 * @param id
 	 *            当前菜单id

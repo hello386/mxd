@@ -119,7 +119,8 @@ function initTable(url) {
 		onLoadError : function() {
 			showMsg("错误", "服务器错误-加载数据出错");
 
-		}
+		},
+		
 	});
 	$('#dg').datagrid('hideColumn', 'PAGE_ID');
 
@@ -207,6 +208,11 @@ function editArticle() {
 	//if (rows && rows.length==1) {
 	if (row) {
 		//var row=rows[0];
+		if(row.ENTITY_TYPE=="ATTACHMENT"){
+			showMsg("提示信息", "目前不能编辑附件类型文章");
+			return;
+		}
+		
 		$("#key").val(row.KEY);
 		var getUrl = base + '/article/getArticle?columnId=' + row.PAGE_ID
 		+ '&key=' + row.KEY;

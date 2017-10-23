@@ -93,7 +93,8 @@ var base = '${base}';
 			       <td>
 			         <select id="ENTITY_TYPE" name="ENTITY_TYPE"  >
 						   <option value="HTML">HTML</option>
-						  <option value="ATTACHMENT">附件</option> <!-- 我的tomcat不能传文件到crm上 只能传到自己服务器上 -->
+						   <!-- 我的tomcat不能传文件到crm上 只能传到自己服务器上 -->
+						  <!-- <option value="ATTACHMENT">附件</option>  -->
 						   <option value="URL">URL</option>
 						 </select>
 			       </td><td></td>
