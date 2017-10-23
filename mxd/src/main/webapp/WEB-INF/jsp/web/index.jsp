@@ -55,7 +55,7 @@ var base = '${base}';
 		   style="width:700px;height:500px"  toolbar="#tb">
 		<thead>
 			<tr>
-				<th data-options="field:'TITLE',width:80">标题</th>
+				<th data-options="field:'TITLE',width:150" formatter="formatTitle">标题</th>
 				<th data-options="field:'PAGE_NAME',width:80">栏目</th>
 				<th data-options="field:'EDITOR_NAME',width:80">作者</th>
 				<th data-options="field:'ENTITY_TYPE',width:80">类型</th>
@@ -63,6 +63,7 @@ var base = '${base}';
 				<th data-options="field:'INFOSUMMARY',width:80">摘要</th>
 				<th data-options="field:'PAGE_ID',width:80 " >栏目id</th>
 				<th data-options="field:'KEY',width:80 " >文章编号</th>
+				<th data-options="field:'ARTICLE_DYNIAMIC_URL',width:80 " >url</th>
 				
 			</tr>
 		</thead>

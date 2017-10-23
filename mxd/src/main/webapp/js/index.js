@@ -119,12 +119,23 @@ function initTable(url) {
 		onLoadError : function() {
 			showMsg("错误", "服务器错误-加载数据出错");
 
-		},
+		}
 		
 	});
 	$('#dg').datagrid('hideColumn', 'PAGE_ID');
+	$('#dg').datagrid('hideColumn', 'ARTICLE_DYNIAMIC_URL');
 
 	// $('#dg').datagrid('hideColumn','STAFF_ID');
+}
+
+function formatTitle(val,row){
+	
+	if (row.ENTITY_TYPE =="URL"){
+		var rurl= '<a href= "'+row.ARTICLE_DYNIAMIC_URL+'" target="_blank">'+val+'</a>';
+		return rurl;
+	} else {
+		return val;
+	}
 }
 
 //显示添加文章
