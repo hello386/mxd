@@ -129,7 +129,6 @@ function initTable(url) {
 }
 
 function formatTitle(val,row){
-	
 	if (row.ENTITY_TYPE =="URL"){
 		var rurl= '<a href= "'+row.ARTICLE_DYNIAMIC_URL+'" target="_blank">'+val+'</a>';
 		return rurl;

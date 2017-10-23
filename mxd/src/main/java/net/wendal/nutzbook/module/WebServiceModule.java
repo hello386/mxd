@@ -66,7 +66,6 @@ public class WebServiceModule {
 	@At
     public Object userMgrSite(@Attr("me")User me) {
 		 //User user = dao.fetch(User.class, Cnd.where("id", "=", me));
-		 
 		   //NutMap re = new NutMap();
 		    
 		   LoginProperty property = new LoginProperty(me.getName(),me.getPassword()); //登陆验证
