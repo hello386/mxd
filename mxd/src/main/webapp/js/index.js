@@ -4,12 +4,9 @@ $(function() {
 	$('#tt')
 			.tree(
 					{
+						animate:true,
 						url : base + '/service/userMgrSite',
 						onClick : function(node) {
-							// alert(node.text); // alert node text property
-							// when clicked
-							// var columUrl =
-							// base+'/service/getPageTreeNode?parentId='+node.parentId+"&siteId="+node.id;
 							$("#siteEnname").val(node.userMgrSite.siteEnname);
 							var columUrl = base
 									+ '/service/getPageTreeNode?parentId=-1&siteId='
@@ -18,11 +15,10 @@ $(function() {
 							$('#tt_coloum')
 									.tree(
 											{
+												animate:true,
 												url : columUrl,
 												onClick : function(node) {
 													// alert(node.text); //
-													// alert node text property
-													// when clicked
 													// var url =
 													// base+'/article/getArticleByPage?columnId='+node.id+"&pageNo=1&pageSize=10";
 													var url = base
@@ -33,8 +29,14 @@ $(function() {
 
 													initTable(url);
 													console.log(url);
+												},
+												onLoadError:function(arg){
+													alert("服务器错误 请刷新页面");
 												}
 											});
+						},
+						onLoadError:function(arg){
+							alert("服务器错误 请刷新页面");
 						}
 					});
 
@@ -42,51 +44,16 @@ $(function() {
 
 	$('#w').window('close');
 	$('#detailW').window('close');
-	
 
 	// 初始化编辑器
 	var E = window.wangEditor;
 	editor = new E('#content');
-	// 或者 var editor = new E( document.getElementById('#editor') )
 	editor.create();
-	// 隐藏输入url
-	//$("#url_tr").hide();
-	// 隐藏附件上传
-	//$("#fj_tr").hide();
-
-	//$("#fileToUpload").hide();
 	
 	$("#ENTITY_TYPE").change(function() {
 		var et = $(this).val();
 		entityTypeChang(et);
-
 	});
-	
-	/*//点击打开文件选择器  
-    $("#upload").on('click', function() {  
-        $('#fileToUpload').click();  
-    });  */
-  //选择文件之后执行上传  
-    /*$('#fileToUpload').on('change', function() {  
-        $.ajaxFileUpload({  
-            url: base+'/article/upload',  
-            secureuri:false,  
-            fileElementId:'fileToUpload',//file标签的id  
-            dataType: 'json',//返回数据的类型  
-            success: function (data, status) {  
-                //把图片替换  
-               // var obj = jQuery.parseJSON(data);  
-                //$("#upload").attr("src", "../image/"+obj.fileName);  
-            	var  filePath=data;
-            	alert(filePath);
-               $("#filepath").val(filePath);
-            },  
-            error: function (data, status, e) {  
-                alert(e);  
-            }  
-        });  
-    });  */
-
 });
 
 function entityTypeChang(et){
@@ -118,19 +85,16 @@ function initTable(url) {
 		},
 		onLoadError : function() {
 			showMsg("错误", "服务器错误-加载数据出错");
-
 		}
-		
 	});
 	$('#dg').datagrid('hideColumn', 'PAGE_ID');
 	$('#dg').datagrid('hideColumn', 'ARTICLE_DYNIAMIC_URL');
-
 	// $('#dg').datagrid('hideColumn','STAFF_ID');
 }
 
 function formatTitle(val,row){
 	if (row.ENTITY_TYPE =="URL"){
-		var rurl= '<a href= "'+row.ARTICLE_DYNIAMIC_URL+'" target="_blank">'+val+'</a>';
+		var rurl= '<a href= "'+row.ENTITY_URL+'" target="_blank">'+val+'</a>';
 		return rurl;
 	} else {
 		return val;
@@ -150,13 +114,11 @@ function showAddArticle() {
 		// $('#w').window('refresh', toAddUrl);
 		$('#w').window('open');
 	}
-
 }
 function saveArticle() {
 	var opt_type=$("#opt_type").val();//新增 还是更新
 	var key=$("#key").val();//新增 还是更新
 	var siteEnname=$("#siteEnname").val();//站点英文名称 保存附件要用 
-
 	var columnId = $("#columnId").val();
 	var addUrl = base + '/article/addArticle';
 	/*
@@ -186,27 +148,19 @@ function saveArticle() {
 	if (entityType == "URL") {
 		var ENTITY_URL = $("#ENTITY_URL").val();
 		data["entieyUrl"] = ENTITY_URL;
-		/*
-		 * data={ title: title ,columnId:columnId,
-		 * status:status,entityType:entityType,entieyUrl:ENTITY_URL };
-		 */
 	}
 	if(entityType == "ATTACHMENT" && opt_type=="add" && filepath==""){
 		showMsg("提示信息", "没有上传附件");
 		return;
 	}
-
 	$.post(addUrl, data, function(data) {
 		console.log(data);
 		if (data.status == "0") {
 			$('#w').window('close');
 			$('#dg').datagrid("reload", {});
-
 		}
 		showMsg("提示信息", data.statusInfo);
-
 	}, "json");
-
 }
 
 function editArticle() {
@@ -217,12 +171,10 @@ function editArticle() {
 	
 	//if (rows && rows.length==1) {
 	if (row) {
-		//var row=rows[0];
 		if(row.ENTITY_TYPE=="ATTACHMENT"){
 			showMsg("提示信息", "目前不能编辑附件类型文章");
 			return;
 		}
-		
 		$("#key").val(row.KEY);
 		var getUrl = base + '/article/getArticle?columnId=' + row.PAGE_ID
 		+ '&key=' + row.KEY;
@@ -242,12 +194,7 @@ function editArticle() {
             		var filePathArr = data.article. ARTICLE_DYNIAMIC_URL.split("/");
             		var filename =filePathArr[filePathArr.length-1];
             		$("#input_file_name").val(filename);
-            		//$("#fileToUpload").val(filename);
-            		//alert(filename);
-            		//$("#fileToUpload").hide();
             	}
-            	
-            	
             	 $('#w').window('open');
              },"json");
 	}else{
@@ -259,7 +206,6 @@ function delArticle() {
 	if (row) {
 		$.messager.confirm('Confirm', '确认要删除吗?', function(r) {
 			if (r) {
-
 				var delUrl = base + '/article/delArticle?columnId='
 						+ row.PAGE_ID + '&key=' + row.KEY;
 				console.log(delUrl);
@@ -276,7 +222,6 @@ function delArticle() {
 		});
 	}
 }
-
 function showArticle() {
 	var row = $('#dg').datagrid('getSelected');
 	if (row) {
@@ -285,10 +230,8 @@ function showArticle() {
 		console.log(getUrl);
 		$('#detailW').window('open');
 		$('#detailW').window('refresh', getUrl);
-
 	}
 }
-
 // 显示提示消息
 function showMsg(title, msg) {
 	$.messager.show({
@@ -298,7 +241,6 @@ function showMsg(title, msg) {
 		showType : 'slide'
 	});
 }
-
 function cleanW() {
 	$("#title").val("");
 	editor.txt.html('');
@@ -311,7 +253,6 @@ function cleanW() {
 	$("#key").val("");
 	$("#input_file").html("<input   id='fileToUpload'   type='file'   name='fileToUpload' />");
 }
-
 function startUpload(){
 	$("#upload_btn").attr("disabled",true).html("上传中....."); 
         $.ajaxFileUpload({  
@@ -343,7 +284,6 @@ function startUpload(){
                 $("#upload_btn").attr("disabled",false).html("确定."); 
             }  
         });  
-    
 }
 //移动 复制 文章
 function showOptArticle(opt_type){
@@ -368,18 +308,14 @@ function showOptArticle(opt_type){
 									});
 				}
 			});
-	
-	
 	$('#optW').window('open');
 }
 function startMovOrCopy(){
 	var  columnId = $("#columnId").val();
 	var to_columnId=$("#to_columnId").val();
 	var opt_type=$("#opt_type").val();
-	
 	var row = $('#dg').datagrid('getSelected');
 	if (row) {
-		
 		if(columnId == to_columnId){
 			//alert("不能选择当前栏目");
 			showMsg("错误", "不能选择当前栏目");
@@ -389,7 +325,6 @@ function startMovOrCopy(){
 			showMsg("错误", "请选择要移动到的栏目");
 			return;
 		}
-		
 		var optUrl = base + '/article/moveOrCopy?to_columnId=' + to_columnId
 				+ '&key=' + row.KEY+"&opt_type="+opt_type+"&columnId="+columnId;
 		console.log(optUrl);
@@ -405,7 +340,5 @@ function startMovOrCopy(){
 		}, "json");
 	}else{
 		showMsg("错误", "请选择一行");
-		
 	}
-	
 }

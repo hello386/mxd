@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title></title>
+<title>数据管理</title>
 
 <link rel="stylesheet" type="text/css" href="${base}/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="${base}/themes/icon.css">
@@ -30,7 +30,9 @@ var base = '${base}';
 <input type="hidden" id="key"><!-- 编辑的时候 文章的 KEY -->
 <input type="hidden" id="siteEnname"><!-- 站点英文名字 保存附件的时候要用 -->
 
-<div style="margin:20px 0;"></div>
+<div style="margin:20px 0;">
+<a href="${base}/user/logout" class="easyui-linkbutton" data-options="iconCls:'icon-save'" >退出系统</a>
+</div>
 <!-- <ul id="tt" class="easyui-tree"></ul> -->
 	
 	
@@ -50,7 +52,8 @@ var base = '${base}';
 			
 			
 		</div>
-		<div data-options="region:'center'" title="文章列表">
+		<div data-options="region:'center'" title="文章列表 "   >
+		
 		<table id="dg"  data-options="rownumbers:true,singleSelect:true,pagination:true" 
 		   style="width:700px;height:500px"  toolbar="#tb">
 		<thead>
@@ -113,11 +116,9 @@ var base = '${base}';
 			       <td><input type='text'  id ='ENTITY_URL'  name='ENTITY_URL'  value='http://'  /></td>
 			       <td></td>
 			    </tr>
-			    
 			 </table>
-			 
 			 <!-- 内容编辑 -->
-				<div id="content"  >
+				<div id="content"  style="height:800px;">
 			    </div>
 		</div>
 			<div data-options="region:'east',split:true" title="基本属性" style="width:180px;">
