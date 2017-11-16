@@ -16,7 +16,7 @@ import javax.xml.ws.Service;
  * 
  */
 @WebServiceClient(name = "UserWSServiceImplService", 
-                  wsdlLocation = "http://localhost:8080/eps/webservice/user?wsdl",
+                  wsdlLocation = "http://localhost:7080/eps/webservice/user?wsdl",
                   targetNamespace = "http://impl.service.webservice.eps.huilan.com/") 
 public class UserWSServiceImplService extends Service {
 
@@ -27,11 +27,11 @@ public class UserWSServiceImplService extends Service {
     static {
         URL url = null;
         try {
-            url = new URL("http://localhost:8080/eps/webservice/user?wsdl");
+            url = new URL("http://localhost:7080/eps/webservice/user?wsdl");
         } catch (MalformedURLException e) {
             java.util.logging.Logger.getLogger(UserWSServiceImplService.class.getName())
                 .log(java.util.logging.Level.INFO, 
-                     "Can not initialize the default wsdl from {0}", "http://localhost:8080/eps/webservice/user?wsdl");
+                     "Can not initialize the default wsdl from {0}", "http://localhost:7080/eps/webservice/user?wsdl");
         }
         WSDL_LOCATION = url;
     }
